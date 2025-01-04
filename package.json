@@ -1,0 +1,33 @@
+{
+  "name": "youtube-bharat",
+  "version": "1.0.0",
+  "description": "We are creating youtube for Bharat",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GithubAnimesh/YouTube-Bharat.git"
+  },
+  "keywords": [
+    "Bharat",
+    "youtube"
+  ],
+  "author": "Animesh Singh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GithubAnimesh/YouTube-Bharat/issues"
+  },
+  "homepage": "https://github.com/GithubAnimesh/YouTube-Bharat#readme",
+  "devDependencies": {
+    "parcel": "^2.13.3",
+    "process": "^0.11.10"
+  },
+  "dependencies": {
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0"
+  }
+}

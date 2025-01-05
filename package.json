@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/GithubAnimesh/YouTube-Bharat#readme",
   "devDependencies": {
-    "parcel": "^2.13.3",
+    "parcel": "^2.13.2",
     "postcss": "^8.4.49",
     "process": "^0.11.10",
     "tailwindcss": "^3.4.17"
@@ -32,6 +32,7 @@
     "@reduxjs/toolkit": "^2.5.0",
     "react": "^18.3.0",
     "react-dom": "^18.3.0",
-    "react-redux": "^9.2.0"
+    "react-redux": "^9.2.0",
+    "react-router-dom": "^6.4.0"
   }
 }

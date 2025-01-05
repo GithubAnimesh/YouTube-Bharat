@@ -15,8 +15,8 @@ const ButtonList = () => {
   ];
   return (
     <div className="flex justify-center">
-      {lists.map((name) => (
-        <Button name={name} />
+      {lists.map((name, index) => (
+        <Button key={index} name={name} />
       ))}
     </div>
   );

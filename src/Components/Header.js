@@ -1,9 +1,35 @@
-import React from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../utils/appSlice";
+import { YOTUBE_SEARCH_API } from "../utils/contants";
+import { cacheResults } from "../utils/searchSlice";
 
 const Header = () => {
+  const [inputValue, setInputValue] = useState("");
+  const [searchSuggetion, setSearchSuggetion] = useState([]);
+  const [showSuggetion, setShowSuggetion] = useState(false);
+  const searchCache = useSelector((store) => store.search);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (searchCache[inputValue]) {
+        getSearchSuggetion(searchCache[inputValue]);
+      } else {
+        getSearchSuggetion();
+      }
+    }, 200); // call after 2 milisecond
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [inputValue]);
+
+  const getSearchSuggetion = async () => {
+    const data = await fetch(YOTUBE_SEARCH_API + inputValue);
+    const json = await data.json();
+    setSearchSuggetion(json[1]);
+    dispatch(cacheResults({ [inputValue]: json[1] })); //update cache
+  };
   const toggleMenuHandler = () => {
     dispatch(toggleMenu());
   };
@@ -24,13 +50,30 @@ const Header = () => {
           />
         </a>
       </div>
-      <div className="col-span-10 px-10 flex items-center justify-center">
-        <input
-          type="text"
-          placeholder="Search"
-          className=" w-1/2 border-gray-100 px-5 border-2 rounded-l-full"
-        />
-        <button className="bg-gray-100 border px-3 rounded-r-full">🔍</button>
+      <div className="col-span-10 px-10">
+        <div>
+          <input
+            type="text"
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            onFocus={() => setShowSuggetion(true)}
+            onBlur={() => setShowSuggetion(false)}
+            placeholder="Search"
+            className=" w-1/2 border-gray-100 px-5 border-2 rounded-l-full"
+          />
+          <button className="bg-gray-100 border px-3 rounded-r-full">🔍</button>
+        </div>
+        {showSuggetion && (
+          <div className="fixed bg-white p-2 w-[31rem] shadow-lg rounded-lg">
+            <ul>
+              {searchSuggetion.map((text, index) => (
+                <li key={index} className="hover:bg-gray-100 shadow-sm">
+                  🔍 {text}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
       <div className="col-span-1">
         <img

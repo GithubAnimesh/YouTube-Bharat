@@ -12,6 +12,11 @@ const ButtonList = () => {
     "Cooking",
     "News",
     "Valentines",
+    "Technology",
+    "Travel",
+    "Education",
+    "Sports",
+    "Science",
   ];
   return (
     <div className="flex justify-center">
